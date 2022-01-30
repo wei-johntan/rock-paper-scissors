@@ -41,26 +41,28 @@ function playRound (playerSelection, computerSelection){
     let playerChoice = playerSelection.toUpperCase();
     let computerChoice = computerSelection.toUpperCase();
 
+    // These if statements are all the possible outcomes that can happen with rock paper scissors
+
     if(playerChoice === 'ROCK' && computerChoice === 'SCISSORS'){
-        return "You Win! Rock beats Scissors";
+        return 'win';
     }
     else if(playerChoice === 'ROCK' && computerChoice === 'PAPER'){
-        return "You Lose! Paper beats Rock";
+        return 'lose';
     }
     else if(playerChoice === 'PAPER' && computerChoice === 'ROCK'){
-        return "You Win! Paper beats Rock";
+        return 'win';
     }
     else if(playerChoice === 'PAPER' && computerChoice === 'SCISSORS'){
-        return "You Lose! Paper beats Rock";
+        return 'lose';
     }
     else if(playerChoice === 'SCISSORS' && computerChoice === 'PAPER'){
-        return "You Win! Scissors beats Paper";
+        return 'win';
     }
     else if(playerChoice === 'SCISSORS' && computerChoice === 'ROCK'){
-        return "You Lose! Rock beats Scissors";
+        return 'lose';
     }
     else{
-        return "It's a draw!";
+        return 'tie';
     }
 }
 
@@ -75,10 +77,49 @@ function game(){
     let playerScore = 0;
     // score for the computer
     let computerScore = 0;
-    // the amount of rounds played (counter)
-    let rounds = 1;
+    // rounds played counter;
+    let rounds = 0;
+    // results of the round in an array
+    let resultsArr = [];
 
-    while(rounds <= 5){
-        if()
+    // This loop essentially plays the 5 rounds
+    for(let i =0; i<5; i++){
+        // Player prompt to choose either rock paper or scissors
+        let playerChoice = prompt('Please enter for rock paper scissors');
+        // Computer randomly generators a choice of either rock paper or scissors
+        let compChoice = computerPlay();
+        // This variable stores the outcome of that play
+        let roundResult = playRound(playerChoice, compChoice);
+        // Print out the result of the play
+        console.log(roundResult);
+        // Appends the result into an array that stores the results of all 5 rounds
+        resultsArr.push(roundResult);
+    }
+
+    // This loop essentially goes through the results array and tallies up the score for the player and the computer
+    // If any of the rounds were a tie then there would be no score added to either the player or the computer
+    for(let i =0; i<resultsArr.length; i++){
+        if(resultsArr[i] == 'win'){
+            playerScore++;
+        }
+        else if(resultsArr[i] == 'lose'){
+            computerScore++;
+        }
+        else{
+            computerScore+=0;
+            playerScore+=0;
+        }
+    }
+    // This essentially prints out the player and computers final score after playing 5 rounds of rock paper scissors
+    console.log('Final Score: Player: ' + playerScore + " " + "Computer Score: " + computerScore);
+    // This if statement prints out who won the 5 rounds of rock paper scissors by comparing the scores that we calculated earlier
+    if(playerScore > computerScore){
+        console.log('Congratulations, you won!');
+    }
+    else if(playerScore < computerScore){
+        console.log('Sorry that you lost to a computer');
+    }
+    else{
+        console.log('Its a tie');
     }
 }
