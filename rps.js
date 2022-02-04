@@ -35,36 +35,54 @@ computerSelection and then return a string that declares the winner of the round
 
 // Write a function that takes two parameters - The playerSelection and computerSelection and then return a string that declares the winner 
 // of the wround.
-function playRound (playerSelection, computerSelection){
+
+
+function playRound (){
 
     // This holds the players choice and makes it uppercase so that it doesn't matter what case the person puts their answer in.
-    let playerChoice = playerSelection.toUpperCase();
-    let computerChoice = computerSelection.toUpperCase();
+
+    let playerScore = 0;
+    let computerScore = 0;
+    let computerChoice = computerPlay().toUpperCase();
+    let playerChoice = this.value;
+    
+
+    console.log(computerChoice);
+    console.log(playerChoice);
+    console.log(this.value);
+    console.log(this.id);
 
     // These if statements are all the possible outcomes that can happen with rock paper scissors
 
     if(playerChoice === 'ROCK' && computerChoice === 'SCISSORS'){
-        return 'win';
+        playerScore++;
+        console.log('win');
     }
     else if(playerChoice === 'ROCK' && computerChoice === 'PAPER'){
-        return 'lose';
+        computerScore++;
+        console.log('lose');
     }
     else if(playerChoice === 'PAPER' && computerChoice === 'ROCK'){
-        return 'win';
+        playerScore++;
     }
     else if(playerChoice === 'PAPER' && computerChoice === 'SCISSORS'){
-        return 'lose';
+        computerScore++;
     }
     else if(playerChoice === 'SCISSORS' && computerChoice === 'PAPER'){
-        return 'win';
+        playerScore++;
     }
     else if(playerChoice === 'SCISSORS' && computerChoice === 'ROCK'){
-        return 'lose';
+        computerScore++;
     }
     else{
-        return 'tie';
+        playerScore+=0;
+        computerScore +=0;
+        console.log('tie');
     }
 }
+
+const testButton = document.getElementById("rock");
+testButton.addEventListener("click",playRound);
 
 
 /*
