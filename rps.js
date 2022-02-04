@@ -82,6 +82,7 @@ function game(){
     // results of the round in an array
     let resultsArr = [];
 
+ /*
     // This loop essentially plays the 5 rounds
     for(let i =0; i<5; i++){
         // Player prompt to choose either rock paper or scissors
@@ -95,6 +96,8 @@ function game(){
         // Appends the result into an array that stores the results of all 5 rounds
         resultsArr.push(roundResult);
     }
+
+*/
 
     // This loop essentially goes through the results array and tallies up the score for the player and the computer
     // If any of the rounds were a tie then there would be no score added to either the player or the computer

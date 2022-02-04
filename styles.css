@@ -1,0 +1,12 @@
+#header{
+    text-align: center;
+    padding-bottom: 50px;
+    font-family: roboto;
+}
+#choice-box, button{
+    display: flex;
+    justify-content: space-evenly;
+}
+button{
+    padding: 12px 32px;
+}
