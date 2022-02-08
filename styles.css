@@ -10,3 +10,15 @@
 button{
     padding: 12px 32px;
 }
+h2{
+    padding-top: 50px;
+    text-align: center;
+}
+#results, #player-comp{
+    display: flex;
+    justify-content: space-evenly;
+}
+#results, #player-comp, .namers{
+    display:flex;
+    justify-content: space-evenly;
+}

@@ -24,7 +24,7 @@ function computerPlay(){
     // Using the Math.Random() function we can make it so that the computer can choose from those three options in the array like so:
     let computerChoice = Math.floor(Math.random()*choices.length);
     // Returns the computers choice for either rock, paper, or scissors.
-    return choices[computerChoice];
+    return choices[computerChoice].toUpperCase();
 
 }
 
@@ -36,111 +36,64 @@ computerSelection and then return a string that declares the winner of the round
 // Write a function that takes two parameters - The playerSelection and computerSelection and then return a string that declares the winner 
 // of the wround.
 
+let playerScore = 0;
+let computerScore = 0;
+let buttons = document.querySelectorAll('button');
 
-function playRound (){
+function disable(){
+    buttons.forEach(button => {
+        button.disabled = true;
+    })
+}
+buttons.forEach(button =>{
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+})
+
+function playRound (playerChoice){
 
     // This holds the players choice and makes it uppercase so that it doesn't matter what case the person puts their answer in.
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let computerChoice = computerPlay().toUpperCase();
-    let playerChoice = this.value;
+
+    let computerChoice = computerPlay();
+    let result = "";
+    document.getElementById("results").innerHTML = result;
+    
+    console.log(playerChoice);
+    console.log(computerChoice);
+
+    if(playerChoice === computerChoice){
+        result = "it's a tie, play again";
+        
+    }
+    else if((playerChoice === 'ROCK' && computerChoice === 'SCISSORS') || (playerChoice === 'PAPER' && computerChoice === 'ROCK') || 
+    (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')){
+        playerScore +=1;
+        result = 'player wins';
+        if(playerScore == 5){
+            result = "player wins the game!, please reload the page to play again :)";
+        }
+    }
+    else{
+        computerScore+=1;
+        result = 'computer wins';
+        if(computerScore == 5){
+            disable();
+            result = "computer wins the game!, please reload the page to play again :)";
+        }
+    }
+    document.getElementById("player").innerHTML = playerScore;
+    document.getElementById("computer").innerHTML = computerScore;
+
+    document.getElementById("results").innerHTML = result;
     
 
-    console.log(computerChoice);
-    console.log(playerChoice);
-    console.log(this.value);
-    console.log(this.id);
 
-    // These if statements are all the possible outcomes that can happen with rock paper scissors
-
-    if(playerChoice === 'ROCK' && computerChoice === 'SCISSORS'){
-        playerScore++;
-        console.log('win');
-    }
-    else if(playerChoice === 'ROCK' && computerChoice === 'PAPER'){
-        computerScore++;
-        console.log('lose');
-    }
-    else if(playerChoice === 'PAPER' && computerChoice === 'ROCK'){
-        playerScore++;
-    }
-    else if(playerChoice === 'PAPER' && computerChoice === 'SCISSORS'){
-        computerScore++;
-    }
-    else if(playerChoice === 'SCISSORS' && computerChoice === 'PAPER'){
-        playerScore++;
-    }
-    else if(playerChoice === 'SCISSORS' && computerChoice === 'ROCK'){
-        computerScore++;
-    }
-    else{
-        playerScore+=0;
-        computerScore +=0;
-        console.log('tie');
-    }
+    
 }
 
-const testButton = document.getElementById("rock");
-testButton.addEventListener("click",playRound);
 
 
-/*
-Write a new function called game(). Use the previous function inside of this one to play a 5 round game that keeps score and 
-reports a winner or loser at the end.
-*/
 
-function game(){
-    // score for the player
-    let playerScore = 0;
-    // score for the computer
-    let computerScore = 0;
-    // rounds played counter;
-    let rounds = 0;
-    // results of the round in an array
-    let resultsArr = [];
 
- /*
-    // This loop essentially plays the 5 rounds
-    for(let i =0; i<5; i++){
-        // Player prompt to choose either rock paper or scissors
-        let playerChoice = prompt('Please enter for rock paper scissors');
-        // Computer randomly generators a choice of either rock paper or scissors
-        let compChoice = computerPlay();
-        // This variable stores the outcome of that play
-        let roundResult = playRound(playerChoice, compChoice);
-        // Print out the result of the play
-        console.log(roundResult);
-        // Appends the result into an array that stores the results of all 5 rounds
-        resultsArr.push(roundResult);
-    }
-
-*/
-
-    // This loop essentially goes through the results array and tallies up the score for the player and the computer
-    // If any of the rounds were a tie then there would be no score added to either the player or the computer
-    for(let i =0; i<resultsArr.length; i++){
-        if(resultsArr[i] == 'win'){
-            playerScore++;
-        }
-        else if(resultsArr[i] == 'lose'){
-            computerScore++;
-        }
-        else{
-            computerScore+=0;
-            playerScore+=0;
-        }
-    }
-    // This essentially prints out the player and computers final score after playing 5 rounds of rock paper scissors
-    console.log('Final Score: Player: ' + playerScore + " " + "Computer Score: " + computerScore);
-    // This if statement prints out who won the 5 rounds of rock paper scissors by comparing the scores that we calculated earlier
-    if(playerScore > computerScore){
-        console.log('Congratulations, you won!');
-    }
-    else if(playerScore < computerScore){
-        console.log('Sorry that you lost to a computer');
-    }
-    else{
-        console.log('Its a tie');
-    }
-}
